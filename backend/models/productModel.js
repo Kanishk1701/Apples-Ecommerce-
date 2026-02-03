@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// ---------- Review Schema (Child) ----------
 const reviewSchema = mongoose.Schema(
   {
     name: {
@@ -29,7 +28,6 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
-// ---------- Product Schema (Parent) ----------
 const productSchema = mongoose.Schema(
   {
     user: {
