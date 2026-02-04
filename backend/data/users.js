@@ -4,19 +4,19 @@ const users = [
   {
     name: 'Admin User',
     email: 'admin@example.com',
-    password: 'password123',
+    password: '123456', // Verified clean string
     isAdmin: true,
   },
   {
     name: 'John Doe',
     email: 'john@example.com',
-    password: 'password123',
+    password: '123456',
     isAdmin: false,
   },
   {
-    name: 'Jane Smith',
+    name: 'Jane Doe',
     email: 'jane@example.com',
-    password: 'password123',
+    password: '123456',
     isAdmin: false,
   },
 ]

@@ -11,6 +11,9 @@ connectDB();
 
 const app = express();
 
+app.use(express.json()) // Allows JSON data
+app.use(express.urlencoded({ extended: true }))
+
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
