@@ -81,7 +81,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     // NOTE: In a real production app, you would recalculate prices here 
     // to verify the frontend didn't tamper with them. 
     // For this project, we will trust the frontend data.
-    
+
     const order = new Order({
       orderItems: orderItems.map((x) => ({
         ...x,
@@ -113,4 +113,9 @@ const getOrderById = asyncHandler(async (req, res) => {
     throw new Error('Order not found')
   }
 })
-export { addOrderItems, getOrderById, updateOrderToPaid, createRazorpayOrder }
+const getMyOrders = asyncHandler(async (req, res) => {
+  // Find orders where 'user' matches the logged-in ID
+  const orders = await Order.find({ user: req.user._id })
+  res.json(orders)
+})
+export { addOrderItems, getOrderById, updateOrderToPaid, createRazorpayOrder, getMyOrders }

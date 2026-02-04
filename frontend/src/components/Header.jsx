@@ -67,13 +67,26 @@ const Header = () => {
               </button>
 
               {/* DROPDOWN MENU */}
+              {/* DROPDOWN MENU */}
               {showDropdown && (
                 <div className="absolute right-0 mt-4 w-48 bg-white border border-gray-100 shadow-xl py-2 z-50">
+                  
+                  {/* 1. User Email Info */}
                   <div className="px-6 py-4 border-b border-gray-50 mb-2">
                     <p className="text-[10px] text-gray-400">Signed in as</p>
                     <p className="text-apples-black font-bold truncate">{userInfo.email}</p>
                   </div>
                   
+                  {/* 2. NEW: Profile Link */}
+                  <Link 
+                    to="/profile" 
+                    className="w-full text-left px-6 py-3 text-gray-600 hover:bg-gray-50 flex items-center gap-2 hover:text-apples-black"
+                    onClick={() => setShowDropdown(false)} // Close menu when clicked
+                  >
+                    <FaUser className="text-sm" /> Profile
+                  </Link>
+
+                  {/* 3. Sign Out Button */}
                   <button 
                     onClick={logoutHandler}
                     className="w-full text-left px-6 py-3 text-red-600 hover:bg-gray-50 flex items-center gap-2"
