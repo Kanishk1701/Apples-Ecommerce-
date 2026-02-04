@@ -1,4 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify' // <--- 1. Import Container
+import 'react-toastify/dist/ReactToastify.css'  // <--- 2. Import CSS
+
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
@@ -6,8 +9,9 @@ import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import VerifyScreen from './screens/VerifyScreen'
-import ShippingScreen from './screens/ShippingScreen' // <--- Make sure this exists
-// import PaymentScreen from './screens/PaymentScreen' <--- DELETE or COMMENT THIS OUT if it exists!
+import ShippingScreen from './screens/ShippingScreen'
+import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
 
 function App() {
   const location = useLocation()
@@ -27,9 +31,13 @@ function App() {
            <Route path="/register" element={<RegisterScreen />} />
            <Route path="/verify" element={<VerifyScreen />} />
            <Route path="/shipping" element={<ShippingScreen />} />
-           {/* <Route path="/payment" element={<PaymentScreen />} /> <--- COMMENT THIS OUT */}
+           <Route path="/payment" element={<PaymentScreen />} />
+           <Route path="/placeorder" element={<PlaceOrderScreen />} />
          </Routes>
       </main>
+
+      {/* 3. Add the Container here so popups work everywhere */}
+      <ToastContainer />
     </div>
   )
 }
