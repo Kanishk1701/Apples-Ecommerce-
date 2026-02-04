@@ -13,10 +13,11 @@ import VerifyScreen from './screens/VerifyScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import OrderScreen from './screens/OrderScreen'
 
 function App() {
   const location = useLocation()
-  const hideHeaderRoutes = ['/login', '/register', '/verify']
+  const hideHeaderRoutes = ['/login', '/register', '/verify', '/shipping', '/payment', '/placeorder']
   const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname)
 
   return (
@@ -34,6 +35,7 @@ function App() {
            <Route path="/shipping" element={<ShippingScreen />} />
            <Route path="/payment" element={<PaymentScreen />} />
            <Route path="/placeorder" element={<PlaceOrderScreen />} />
+           <Route path="/order/:id" element={<OrderScreen />} />
          </Routes>
       </main>
 
