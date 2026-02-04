@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* --- LUXURY TOAST OVERRIDES --- */
+.Toastify__toast {
+  border-radius: 0px !important;       
+  font-family: 'Playfair Display', serif !important; 
+  background-color: #111 !important;   
+  color: #fff !important;              
+  border: 1px solid #333 !important;   
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important; 
+  letter-spacing: 0.05em !important;   
+  text-transform: uppercase !important; 
+  font-size: 11px !important;          
+  font-weight: 700 !important;
+  min-height: 50px !important;         
+}
+
+.Toastify__progress-bar {
+  background: #666 !important;         
+  height: 2px !important;              
+}
+
+.Toastify__close-button {
+  color: #fff !important;
+  opacity: 0.5 !important;
+}
+.Toastify__close-button:hover {
+  opacity: 1 !important;
+}
+
+.Toastify__toast--success {
+  border-left: 3px solid #4ade80 !important; 
+}
+.Toastify__toast--error {
+  border-left: 3px solid #f87171 !important; 
+}

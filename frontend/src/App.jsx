@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify' // <--- 1. Import Container
-import 'react-toastify/dist/ReactToastify.css'  // <--- 2. Import CSS
+// 1. Import 'Slide' for a smoother animation
+import { ToastContainer, Slide } from 'react-toastify' 
+import 'react-toastify/dist/ReactToastify.css'
 
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
@@ -36,8 +37,21 @@ function App() {
          </Routes>
       </main>
 
-      {/* 3. Add the Container here so popups work everywhere */}
-      <ToastContainer />
+      {/* 2. Premium Configuration */}
+      <ToastContainer
+        position="bottom-right" // Elegant placement
+        autoClose={3000}        // Closes faster (3s)
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"            // Base dark theme
+        transition={Slide}      // Smooth Slide (No Bounce)
+        toastClassName="premium-toast" // Custom Class hook
+      />
     </div>
   )
 }

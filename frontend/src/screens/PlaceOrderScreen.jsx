@@ -1,12 +1,17 @@
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { toast } from 'react-toastify'
+import { useCreateOrderMutation } from '../slices/ordersApiSlice'
+import { clearCartItems } from '../slices/cartSlice'
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation()
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -17,8 +22,25 @@ const PlaceOrderScreen = () => {
   }, [cart.paymentMethod, cart.shippingAddress.address, navigate])
 
   const placeOrderHandler = async () => {
-    console.log('Order Placed')
-    toast.info('Order Logic Coming Soon!')
+    try {
+      const res = await createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }).unwrap()
+
+      dispatch(clearCartItems()) // Clear the Redux cart
+      // We will create this "Order Details" page next!
+      // For now, let's just alert success
+      toast.success('Order Placed Successfully!')
+      navigate(`/order/${res._id}`) 
+    } catch (err) {
+      toast.error(err?.data?.message || err.error)
+    }
   }
 
   return (
@@ -59,7 +81,6 @@ const PlaceOrderScreen = () => {
                         {item.name}
                       </Link>
                     </div>
-                    {/* CHANGED TO ₹ BELOW */}
                     <div className="text-sm text-gray-500 font-mono">
                       {item.qty} x ₹{item.price} = <span className="text-apples-black font-bold">₹{(item.qty * item.price).toFixed(2)}</span>
                     </div>
@@ -79,36 +100,31 @@ const PlaceOrderScreen = () => {
             <div className="space-y-4 text-sm">
               <div className="flex justify-between pb-4 border-b border-gray-200">
                 <span className="text-gray-600">Items</span>
-                {/* CHANGED TO ₹ BELOW */}
                 <span className="font-mono">₹{cart.itemsPrice}</span>
               </div>
-              
               <div className="flex justify-between pb-4 border-b border-gray-200">
                 <span className="text-gray-600">Shipping</span>
-                {/* CHANGED TO ₹ BELOW */}
                 <span className="font-mono">₹{cart.shippingPrice}</span>
               </div>
-              
               <div className="flex justify-between pb-4 border-b border-gray-200">
                 <span className="text-gray-600">Tax</span>
-                {/* CHANGED TO ₹ BELOW */}
                 <span className="font-mono">₹{cart.taxPrice}</span>
               </div>
-              
               <div className="flex justify-between pt-4 text-lg font-bold">
                 <span>Total</span>
-                {/* CHANGED TO ₹ BELOW */}
                 <span className="font-mono">₹{cart.totalPrice}</span>
               </div>
             </div>
 
+            {error && <div className="mt-4 text-red-500 text-xs text-center">{error.data?.message}</div>}
+
             <button
               type="button"
               className="w-full bg-apples-black text-white py-4 mt-8 uppercase tracking-widest font-bold hover:bg-gray-800 transition-colors disabled:opacity-50"
-              disabled={cart.cartItems.length === 0}
+              disabled={cart.cartItems.length === 0 || isLoading}
               onClick={placeOrderHandler}
             >
-              Place Order
+              {isLoading ? 'Processing...' : 'Place Order'}
             </button>
           </div>
         </div>
