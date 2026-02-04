@@ -1,9 +1,10 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-// 1. Import 'Slide' for a smoother animation
-import { ToastContainer, Slide } from 'react-toastify' 
+import { ToastContainer, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Header from './components/Header'
+import AdminRoute from './components/AdminRoute' // <--- 1. Import This
+
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
@@ -27,24 +28,33 @@ function App() {
       
       <main className={shouldShowHeader ? "py-3" : ""}>
          <Routes>
+           {/* Public Routes */}
            <Route path="/" element={<HomeScreen />} />
            <Route path="/product/:id" element={<ProductScreen />} />
            <Route path="/cart" element={<CartScreen />} />
            <Route path="/login" element={<LoginScreen />} />
            <Route path="/register" element={<RegisterScreen />} />
            <Route path="/verify" element={<VerifyScreen />} />
+
+           {/* Private Routes (Logged In Users) */}
            <Route path="/shipping" element={<ShippingScreen />} />
            <Route path="/payment" element={<PaymentScreen />} />
            <Route path="/placeorder" element={<PlaceOrderScreen />} />
            <Route path="/order/:id" element={<OrderScreen />} />
            <Route path="/profile" element={<ProfileScreen />} />
+
+           {/* ADMIN ROUTES (Managers Only) */}
+           <Route path="" element={<AdminRoute />}>
+              {/* We will create this file in the next step! */}
+              {/* <Route path="/admin/productlist" element={<ProductListScreen />} /> */}
+           </Route>
+
          </Routes>
       </main>
 
-      {/* 2. Premium Configuration */}
       <ToastContainer
-        position="bottom-right" // Elegant placement
-        autoClose={3000}        // Closes faster (3s)
+        position="bottom-right"
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick
@@ -52,9 +62,9 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"            // Base dark theme
-        transition={Slide}      // Smooth Slide (No Bounce)
-        toastClassName="premium-toast" // Custom Class hook
+        theme="dark"
+        transition={Slide}
+        toastClassName="premium-toast"
       />
     </div>
   )

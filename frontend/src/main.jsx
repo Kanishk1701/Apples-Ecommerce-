@@ -6,7 +6,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js' // <--- Import Pa
 import store from './store'
 import App from './App.jsx'
 import './index.css' // Or './custom.css' if you used that
-
+import AdminRoute from './components/AdminRoute.jsx'
 // 1. We wrap the App in BrowserRouter here 
 // (OR if you are using the newer router method, we fix it below)
 
