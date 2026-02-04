@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { FaArrowLeft, FaStar } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../slices/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 const ProductScreen = () => {
   const [product, setProduct] = useState({})
@@ -15,6 +18,15 @@ const ProductScreen = () => {
 
     fetchProduct()
   }, [id])
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [qty, setQty] = useState(1)
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }))
+    navigate('/cart') // Go to cart page immediately
+  }
 
   return (
     <div className="container mx-auto px-12 py-12">
@@ -64,6 +76,7 @@ const ProductScreen = () => {
           <button 
             className="w-full bg-apples-black text-white py-4 uppercase tracking-widest font-bold hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             disabled={product.countInStock === 0}
+            onClick={addToCartHandler}
           >
             {product.countInStock === 0 ? 'Out of Stock' : 'Add to Shopping Bag'}
           </button>
