@@ -52,7 +52,7 @@ const PaymentScreen = () => {
                 checked
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
-              <span className="font-serif text-lg">PayPal or Credit Card</span>
+              <span className="font-serif text-lg">RazorPay or Credit Card</span>
             </label>
           </div>
 
