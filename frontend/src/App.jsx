@@ -17,6 +17,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import ProductListScreen from './screens/admin/ProductListScreen'
+import ProductEditScreen from './screens/admin/ProductEditScreen'
 
 function App() {
   const location = useLocation()
@@ -47,6 +48,7 @@ function App() {
           {/* ADMIN ROUTES (Managers Only) */}
            <Route path="" element={<AdminRoute />}>
               <Route path="/admin/productlist" element={<ProductListScreen />} />
+              <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
            </Route>
 
          </Routes>

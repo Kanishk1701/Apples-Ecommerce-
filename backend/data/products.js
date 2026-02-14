@@ -47,7 +47,7 @@ const products = [
     rating: 4.9,
     numReviews: 45,
   },
-   {
+  {
     name: 'Rolex Submariner Date',
     image: '/images/rolex.jpg',
     description:
@@ -55,8 +55,20 @@ const products = [
     brand: 'Rolex',
     category: 'Watches',
     price: 1250000,
-    countInStock: 0, // Out of stock example
+    countInStock: 10, // Out of stock example
     rating: 4.9,
+    numReviews: 4,
+  },
+  {
+    name: 'Prada',
+    image: '/images/prada.jpg',
+    description:
+      'The sunglasses from the Spring/Summer 2026 runway show present retro elegance with a contemporary twist. The rectangular acetate frame is characterized by slim, light lines, an expression of modern, minimalist style. The straight temples feature the signature touch of the enameled Prada lettering logo.',
+    brand: 'Prada',
+    category: 'Sunglasses',
+    price: 45000,
+    countInStock: 150, // Out of stock example
+    rating: 4.7,
     numReviews: 4,
   },
 ]

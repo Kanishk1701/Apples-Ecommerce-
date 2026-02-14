@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import {
@@ -9,7 +9,7 @@ import {
 
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery()
-  
+
   const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
   const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation()
 
@@ -83,6 +83,9 @@ const ProductListScreen = () => {
                       <button className="text-gray-600 hover:text-apples-black mr-4">
                         <FaEdit />
                       </button>
+                    </Link>
+                    <Link to={`/admin/product/${product._id}/edit`}>
+                      <button>Edit</button>
                     </Link>
                     <button
                       onClick={() => deleteHandler(product._id)}
